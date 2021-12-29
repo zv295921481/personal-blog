@@ -12,32 +12,32 @@ const routes = [
     redirect: '/homePage',
     children: [
       {
-        path: '/homePage',
+        path: 'homePage',
         name: 'home',
         component: () => import('@/views/HomePage')
       },
       {
-        path: '/mylife',
+        path: 'mylife',
         name: 'about',
         component: () => import('@/views/MyLife')
       },
       {
-        path: '/archives',
+        path: 'archives',
         name: 'archives',
         component: () => import('@/views/Archives')
       },
       {
-        path: '/book',
+        path: 'book',
         name: 'home',
         component: () => import('@/views/BookList')
       },
       {
-        path: '/board',
+        path: 'board',
         name: 'board',
         component: () => import('@/views/Board')
       },
       {
-        path: '/about',
+        path: 'about',
         name: 'about',
         component: () => import('@/views/AboutMe')
       }

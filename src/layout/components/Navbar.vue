@@ -28,7 +28,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .nav-bar {
-  width: 70%;
+  width: 1050px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -37,9 +37,10 @@ export default {
   margin-top: 0px;
   font-size: 24px;
   font-weight: 600;
+  letter-spacing: 1px;
 }
 .nav-a {
-  margin: 0 10px;
+  margin: 0 15px;
   font-size: 18px;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="">
+  <div class="main">
     <div class="navbar">
       <navbar />
     </div>
-    <div class="main">
+    <div class="lay-containt">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <router-view :key="key" />
@@ -37,6 +37,19 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.main {
+  height: 100%;
+  .navbar {
+    height: 80px;
+    background-color: #6aa1d1;
+    line-height: 80px;
+    margin-bottom: 30px;
+  }
+  .lay-containt {
+    height: 100%;
+    margin: 10px 70px;
+  }
+}
 .fade-transform-leave-active,
 .fade-transform-enter-active {
   transition: all 0.5s;
@@ -50,15 +63,5 @@ export default {
 .fade-transform-leave-to {
   opacity: 0;
   transform: translateX(30px);
-}
-.navbar {
-  height: 80px;
-  background-color: #6aa1d1;
-  line-height: 80px;
-  margin-bottom: 30px;
-}
-.main {
-  background-color: steelblue;
-  height: 400px;
 }
 </style>
