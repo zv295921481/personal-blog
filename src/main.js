@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/style/index.css'
+import 'highlight.js/scss/monokai-sublime.scss'
 
 Vue.config.productionTip = false
 

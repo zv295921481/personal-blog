@@ -10,6 +10,9 @@
         </keep-alive>
       </transition>
     </div>
+    <div class="ipc">
+      <a href="">粤ICP备xxxxxxxx号</a>
+    </div>
   </div>
 </template>
 
@@ -48,6 +51,13 @@ export default {
   .lay-containt {
     height: 100%;
     margin: 10px 70px;
+  }
+  .ipc {
+    position: relative;
+    bottom: 13px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
   }
 }
 .fade-transform-leave-active,

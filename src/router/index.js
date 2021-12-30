@@ -14,32 +14,32 @@ const routes = [
       {
         path: 'homePage',
         name: 'home',
-        component: () => import('@/views/HomePage')
+        component: () => import('@/views/homePage/index')
       },
       {
         path: 'mylife',
         name: 'about',
-        component: () => import('@/views/MyLife')
+        component: () => import('@/views/myLife/index')
       },
       {
         path: 'archives',
         name: 'archives',
-        component: () => import('@/views/Archives')
+        component: () => import('@/views/archives/index')
       },
       {
         path: 'book',
         name: 'home',
-        component: () => import('@/views/BookList')
+        component: () => import('@/views/bookList/index')
       },
       {
         path: 'board',
         name: 'board',
-        component: () => import('@/views/Board')
+        component: () => import('@/views/board/index')
       },
       {
         path: 'about',
         name: 'about',
-        component: () => import('@/views/AboutMe')
+        component: () => import('@/views/aboutMe/index')
       }
     ]
   }

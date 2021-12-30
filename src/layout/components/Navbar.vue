@@ -1,13 +1,15 @@
 <template>
   <div class='nav-bar'>
-    <p class="nav-left">ZhouZhiyong</p>
+    <p class="nav-left"><img src="@/assets/images/name1.png" alt="" style="width: 200px" title="name"></p>
     <div class="nav-right">
-      <router-link to="/" class="active nav-a">首页</router-link>
-      <router-link to="/mylife" class="nav-a">行博</router-link>
-      <router-link to="/book" class="nav-a">我的书单</router-link>
-      <router-link to="/archives" class="nav-a">归档</router-link>
-      <router-link to="/board" class="nav-a">留言板</router-link>
-      <router-link to="/about" class="nav-a">关于</router-link>
+      <router-link
+        :to="item.path"
+        class="nav-a"
+        :class="item.path == $route.path ? 'active': ''"
+        v-for="(item, index) in linkList"
+        :key="index">
+        {{ item.text }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -17,12 +19,41 @@ export default {
   name: 'Navbar',
   components: {},
   data () {
-    return {}
+    return {
+      linkList: [
+        {
+          path: '/homePage',
+          text: '首页'
+        },
+        {
+          path: '/mylife',
+          text: '行博'
+        },
+        {
+          path: '/book',
+          text: '我的书单'
+        },
+        {
+          path: '/archives',
+          text: '归档'
+        },
+        {
+          path: '/board',
+          text: '留言板'
+        },
+        {
+          path: '/about',
+          text: '关于'
+        }
+      ]
+    }
   },
   computed: {},
   watch: {},
   methods: {},
-  created () {},
+  created () {
+    console.log('route', this.$route.path)
+  },
   mounted () {}
 }
 </script>
@@ -42,5 +73,15 @@ export default {
 .nav-a {
   margin: 0 15px;
   font-size: 18px;
+  color: #ccc1c1;
+}
+.nav-a.active {
+  color: #fff;
+}
+.nav-a:hover {
+  color: #fff;
+}
+.actvie {
+  color: #fff;
 }
 </style>

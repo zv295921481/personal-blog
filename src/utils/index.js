@@ -5,8 +5,8 @@
  * @date 2021-12-29
  * @export
  * @param {function} func -函数
- * @param {int} time -延迟时间
- * @return {*}
+ * @param {Number} time -延迟时间
+ * @return {function}
  */
 export function debounce (func, time) {
   let timeout
@@ -24,9 +24,9 @@ export function debounce (func, time) {
  * @date 2021-12-29
  * @export
  * @param {string} date
- * @return {*}
+ * @return {string}
  */
 export function dateFormat (date) {
-  var time = new Date(date).toLocaleDateString().replace(/\//g, '-')
+  var time = new Date(date).toLocaleDateString()
   return time
 }
