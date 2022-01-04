@@ -18,7 +18,7 @@
 import SelfInfo from '@/components/SelfInfo.vue'
 import BlogItem from './blogItem.vue'
 import skeleton from '@/components/skeleton/skeleton.vue'
-import { getList } from '../../../mock/index'
+import { getList } from '@/api/index'
 export default {
   name: 'HomePage',
   components: {
