@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     key () {
-      return this.$router.path
+      return this.$route.path
     }
   },
   watch: {},
@@ -41,20 +41,19 @@ export default {
 </script>
 <style lang='scss' scoped>
 .main {
+  position: relative;
   height: 100%;
   .navbar {
+    min-width: 1400px;
     height: 80px;
     background-color: #6aa1d1;
     line-height: 80px;
     margin-bottom: 30px;
   }
   .lay-containt {
-    height: 100%;
-    margin: 10px 70px;
+    min-height: calc(100% - 140px);
   }
   .ipc {
-    position: relative;
-    bottom: 13px;
     text-align: center;
     color: #999;
     font-size: 14px;

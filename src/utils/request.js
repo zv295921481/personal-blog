@@ -7,6 +7,9 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     //  doSomething
+    // config.headers['Access-Control-Allow-Origin'] = '*'
+    // config.headers['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS, PUT, DELETE'
+    // config.headers['Access-Control-Allow-Headers'] = 'Content-Type, x-requested-with'
     return config
   },
   error => {

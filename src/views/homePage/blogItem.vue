@@ -1,13 +1,14 @@
 <template>
   <div class=''>
     <div class="home-item">
-      <a class="title" href="">{{ article.title }}</a>
+      <router-link :to="`/article/${article._id}`" class="title">{{ article.title }}</router-link>
       <div class="sec-content">
         <i class="iconfont icon-shijian"></i><span class="m">{{ getDate(article.createdAt) }}</span>
         <i class="iconfont icon-gengxin"></i><span class="m">{{ getDate(article.updatedAt) }}</span>
         <i class="iconfont icon-guidang"></i><span class="m">{{ article.category }}</span>
       </div>
-      <p class="small-text">{{ article.summary }} &nbsp;&nbsp; <a href="" style="text-decoration: underline;">阅读原文</a></p>
+      <p class="small-text">{{ article.summary }} &nbsp;&nbsp; <router-link :to="`/article/${article._id}`" style="text-decoration: underline; font-size: 16px;">阅读原文</router-link>
+      </p>
       <div class="item-footer">
         <tag :tagList="article.tagNames"></tag>
         <div class="item-footer-right">
@@ -24,7 +25,6 @@
 </template>
 
 <script>
-import { getList } from '../../../mock/index'
 import Tag from './components/tag.vue'
 export default {
   name: 'BlogItem',
@@ -41,26 +41,18 @@ export default {
   },
   data () {
     return {
-      dataList: []
+      articleInfo: this.article
     }
   },
   computed: {},
   watch: {},
   methods: {
+    // 截取年月日
     getDate (date) {
       return date.substr(0, 10)
     }
   },
-  created () {
-    getList()
-      .then((res) => {
-        console.log('res', res)
-        this.dataList = res.data
-      })
-      .catch((err) => {
-        alert(err)
-      })
-  },
+  created () {},
   mounted () {}
 }
 </script>
@@ -74,6 +66,10 @@ export default {
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
+    :hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
   .sec-content {
     color: #999;
