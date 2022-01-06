@@ -49,7 +49,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .self-main {
-  width: 315px;
+  width: 280px;
   background-color: #fff;
   padding: 35px 10px;
   text-align: center;

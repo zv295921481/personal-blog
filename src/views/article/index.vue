@@ -5,16 +5,25 @@
     </template>
     <template v-else>
       <div class="article-left">
-        <div class="art-top">
-          <h1 class="title">{{ articleInfo.title }}</h1>
-          <div class="sec-content">
-            <i class="iconfont icon-shijian"></i><span class="m">{{ getDate(articleInfo.createdAt) }}</span>
-            <i class="iconfont icon-gengxin"></i><span class="m">{{ getDate(articleInfo.updatedAt) }}</span>
-            <i class="iconfont icon-guidang"></i><span class="m">{{ articleInfo.category }}</span>
-            <i class="iconfont icon-chakan"></i><span class="m">({{ articleInfo.viewCount }})</span>
+        <div class="blog">
+          <div class="art-top">
+            <h1 class="title">{{ articleInfo.title }}</h1>
+            <div class="sec-content">
+              <i class="iconfont icon-shijian"></i><span class="m">{{ getDate(articleInfo.createdAt) }}</span>
+              <i class="iconfont icon-gengxin"></i><span class="m">{{ getDate(articleInfo.updatedAt) }}</span>
+              <i class="iconfont icon-guidang"></i><span class="m">{{ articleInfo.category }}</span>
+              <i class="iconfont icon-chakan"></i><span class="m">({{ articleInfo.viewCount }})</span>
+            </div>
+          </div>
+          <div v-html="articleInfo.HTML" class="text"></div>
+          <tag :tagList="articleInfo.tagNames" class="tag"></tag>
+          <div class="dz">
+            <i class="iconfont icon-dianzan1 like" v-show="!likeBoolean" @click="clickLike(articleInfo._id)"></i>
+            <i class="iconfont icon-dianzan2 like" style="color: red" v-show="likeBoolean" @click="canelLike(articleInfo._id)"></i>
+            <p>{{ articleInfo.likeCount }} 人点赞</p>
           </div>
         </div>
-        <div v-html="articleInfo.HTML" class="text"></div>
+        <Comment class="art-comment"></Comment>
       </div>
       <div class="article-right">
         <p>目录</p>
@@ -24,41 +33,77 @@
 </template>
 
 <script>
-import { getArticleById } from '@/api/index'
+import { getArticleById } from '@/api/blog'
+import { mapGetters } from 'vuex'
 import skeleton from '@/components/skeleton/skeleton.vue'
+import Tag from '../homePage/components/tag.vue'
+import Comment from './comment.vue'
 import '@/style/markdown.scss'
 import 'highlight.js/scss/monokai-sublime.scss'
 export default {
   name: 'Article',
-  components: { skeleton },
+  components: {
+    skeleton,
+    Tag,
+    Comment
+  },
   data () {
     return {
       id: '', // 文章id
       articleInfo: {}, // 文章内容
       skeletonBoolean: true // 骨架屏
+      // likeBoolean: false // 是否点赞
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['likeCount']),
+    likeBoolean () {
+      return this.likeCount.includes(this.articleInfo._id)
+    }
+  },
   watch: {},
   methods: {
     // 获取文章详情
     getArticle () {
       this.id = this.$route.params.id
       console.log('id', this.id)
-      getArticleById(this.id)
-        .then((res) => {
-          this.articleInfo = res.data
-          this.skeletonBoolean = false
-          console.log('res', res.data)
-        })
-        .catch((err) => {
-          alert(err)
-        })
+      getArticleById(this.id).then((res) => {
+        this.articleInfo = res.data
+        this.skeletonBoolean = false
+        console.log('res', res.data)
+      })
+      // .catch((err) => {
+      //   alert(err)
+      // })
     },
 
     // 截取年月日
     getDate (date) {
       return date.substr(0, 10)
+    },
+
+    // 点赞
+    clickLike (id) {
+      console.log('likeBoolean', this.$store)
+      if (!this.likeCount.includes(id)) {
+        this.$store.dispatch('tourist/addLikeCount', id).then((res) => {
+          this.articleInfo.likeCount = res.data.likeCount
+        })
+      }
+    },
+
+    // 取消点赞
+    canelLike (id) {
+      if (this.likeCount.includes(id)) {
+        this.$store
+          .dispatch('tourist/cancelLike', id)
+          .then((res) => {
+            this.articleInfo.likeCount = res.data.likeCount
+          })
+          .catch((err) => {
+            alert(err)
+          })
+      }
     }
   },
   created () {
@@ -75,9 +120,12 @@ export default {
   display: flex;
   justify-content: space-around;
   .article-left {
-    background-color: #fff;
-    padding: 30px 20px;
-    width: 800px;
+    // background-color: #fff;
+    width: 850px;
+    .blog {
+      background-color: #fff;
+      padding: 30px 20px;
+    }
     .art-top {
       margin-bottom: 50px;
       .title {
@@ -97,6 +145,26 @@ export default {
       }
     }
     .text {
+    }
+    .tag {
+      margin: 50px 0 10px 0;
+      color: #999;
+    }
+    .dz {
+      text-align: center;
+      margin: 30px 0 20px 0;
+    }
+    .like {
+      font-size: 36px;
+      text-align: center;
+    }
+    .like:hover {
+      cursor: pointer;
+    }
+    .art-comment {
+      background-color: #fff;
+      padding: 30px 20px;
+      margin: 40px 0;
     }
   }
   .article-right {

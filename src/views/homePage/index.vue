@@ -18,7 +18,7 @@
 import SelfInfo from '@/components/SelfInfo.vue'
 import BlogItem from './blogItem.vue'
 import skeleton from '@/components/skeleton/skeleton.vue'
-import { getList } from '@/api/index'
+import { getList } from '@/api/blog'
 export default {
   name: 'HomePage',
   components: {
@@ -62,7 +62,7 @@ export default {
   justify-content: space-around;
 }
 .left {
-  width: 800px;
+  width: 850px;
 }
 .right {
   float: right;
