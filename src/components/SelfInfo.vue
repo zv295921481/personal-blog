@@ -6,7 +6,7 @@
       <i class="iconfont icon-dingwei"></i><span style="margin-left: 10px">广东-深圳</span><br>
       2021年毕业于东华理工大学长江学院<br>前端小白&nbsp;&nbsp;<img src="@/assets/images/smile.png" alt="" style="width: 18px">
     </div>
-    <a href="https://github.com/zv295921481" class="github-link"><i class="iconfont icon-github"></i>&nbsp;zv295921481&nbsp;<i class="iconfont icon-daohang"></i></a>
+    <a href="https://github.com/zv295921481" target="_blank" class="github-link"><i class="iconfont icon-github"></i>&nbsp;zv295921481&nbsp;<i class="iconfont icon-daohang"></i></a>
     <div>
       <button class="dy-btn" @click="subscribe">订阅&nbsp;<i class="iconfont icon-subscribe-1-copy"></i></button>
     </div>

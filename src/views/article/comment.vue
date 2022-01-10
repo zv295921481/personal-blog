@@ -1,6 +1,13 @@
 <template>
   <div class='comment'>
     <h2>评论<span style="font-size: 20px; color: #999">（0）</span></h2>
+    <CommentItem
+      class="comment-item"
+      v-for=" item, index in commentList"
+      :key="index"
+      :commentDetail="item"
+      :index="index">
+    </CommentItem>
     <form action="">
       <p style="font-size: 20px">添加评论</p>
       <textarea name="" id="" cols="70" rows="8"></textarea>
@@ -26,11 +33,23 @@
 </template>
 
 <script>
+import CommentItem from './commentItem.vue'
+import { getList } from '@/api/comment'
 export default {
   name: 'Comment',
-  components: {},
+  props: {
+    articleId: {
+      type: String,
+      default: ''
+    }
+  },
+  components: {
+    CommentItem
+  },
   data () {
-    return {}
+    return {
+      commentList: [] // 评论列表
+    }
   },
   computed: {},
   watch: {},
@@ -38,9 +57,19 @@ export default {
     // 提交评论
     submitComment () {
       alert('提交成功')
+    },
+
+    // 获取评论列表
+    getCommentList () {
+      console.log('articleId', this.articleId)
+      getList({ articleId: this.articleId }).then((res) => {
+        this.commentList = res.data
+      })
     }
   },
-  created () {},
+  created () {
+    this.getCommentList()
+  },
   mounted () {}
 }
 </script>

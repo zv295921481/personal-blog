@@ -15,7 +15,9 @@
               <i class="iconfont icon-chakan"></i><span class="m">({{ articleInfo.viewCount }})</span>
             </div>
           </div>
-          <div v-html="articleInfo.HTML" class="text"></div>
+          <div class="markdown-body">
+            <div v-html="articleInfo.HTML" class="theme-default-content content__default"></div>
+          </div>
           <tag :tagList="articleInfo.tagNames" class="tag"></tag>
           <div class="dz">
             <i class="iconfont icon-dianzan1 like" v-show="!likeBoolean" @click="clickLike(articleInfo._id)"></i>
@@ -23,10 +25,10 @@
             <p>{{ articleInfo.likeCount }} 人点赞</p>
           </div>
         </div>
-        <Comment class="art-comment"></Comment>
+        <Comment class="art-comment" :articleId="articleInfo._id"></Comment>
       </div>
       <div class="article-right">
-        <p>目录</p>
+        <Catalogue :catalogueList="articleInfo.headers"></Catalogue>
       </div>
     </template>
   </div>
@@ -38,14 +40,16 @@ import { mapGetters } from 'vuex'
 import skeleton from '@/components/skeleton/skeleton.vue'
 import Tag from '../homePage/components/tag.vue'
 import Comment from './comment.vue'
+import Catalogue from './catalogue.vue'
 import '@/style/markdown.scss'
-import 'highlight.js/scss/monokai-sublime.scss'
+// import 'highlight.js/scss/monokai-sublime.scss'
 export default {
   name: 'Article',
   components: {
     skeleton,
     Tag,
-    Comment
+    Comment,
+    Catalogue
   },
   data () {
     return {
@@ -144,8 +148,6 @@ export default {
         }
       }
     }
-    .text {
-    }
     .tag {
       margin: 50px 0 10px 0;
       color: #999;
@@ -171,7 +173,7 @@ export default {
     position: sticky;
     top: 20px;
     width: 270px;
-    height: 300px;
+    height: 350px;
     background-color: #fff;
     padding: 10px 10px;
   }
