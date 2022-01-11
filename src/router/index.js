@@ -47,6 +47,16 @@ const routes = [
         component: () => import('@/views/article/index')
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: () => import('@/views/edit/index.vue')
   }
 
 ]
@@ -57,5 +67,17 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
-
+router.beforeEach((to, from, next) => {
+  console.log('loginInfo', localStorage.getItem('blogLogin'), to)
+  var loginBoolean = JSON.parse(localStorage.getItem('blogLogin')).loginBoolean || false
+  if (to.path === '/edit') {
+    if (loginBoolean) {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 export default router

@@ -21,6 +21,7 @@
 <script>
 import Vue from 'vue'
 import VueScrollTo from 'vue-scrollto'
+import { throttle } from '@/utils/index'
 Vue.use(VueScrollTo)
 export default {
   name: 'Catalogue',
@@ -52,7 +53,6 @@ export default {
         var top = dom.getBoundingClientRect().top
         if (top > 0 && top <= 101) {
           this.activeIndex = index
-          console.log('activeIndex', this.activeIndex)
         }
         if (this.activeIndex === 0) {
           var dom0 = document.getElementById(this.menuList[0].slug)
@@ -66,7 +66,7 @@ export default {
   },
   created () {},
   mounted () {
-    window.addEventListener('scroll', this.loadScroll)
+    window.addEventListener('scroll', throttle(this.loadScroll, 10))
   }
 }
 </script>

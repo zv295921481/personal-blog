@@ -4,7 +4,7 @@
     <div class="right">
       <div>
         <div class="name">{{ commentDetail.nickname }}</div>
-        <span class="time">{{ commentDetail.createdAt}}</span>
+        <span class="time">{{ dateFormat}}</span>
         <p>{{ commentDetail.comment }}</p>
       </div>
       <div>引用 #{{ index }}</div>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
   name: 'CommentItem',
   props: {
@@ -34,8 +35,10 @@ export default {
   computed: {
     getHead () {
       return this.commentDetail.nickname.substring(0, 1)
+    },
+    dateFormat () {
+      return dayjs(this.commentDetail.createdAt).format('YYYY-MM-DD HH:mm:ss')
     }
-    // dateFormat () {}
   },
   watch: {},
   methods: {},

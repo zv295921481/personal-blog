@@ -1,7 +1,7 @@
 
 /**
- *
- * @author zzy防抖
+ * 防抖
+ * @author zzy
  * @date 2021-12-29
  * @export
  * @param {function} func -函数
@@ -11,9 +11,33 @@
 export function debounce (func, time) {
   let timeout
   return function (e) {
-    clearTimeout(timeout)
+    if (timeout) {
+      clearTimeout(timeout)
+    }
     timeout = setTimeout(() => {
       func()
+    }, time)
+  }
+}
+
+/**
+ * 节流
+ * @author zzy
+ * @date 2022-01-11
+ * @export
+ * @param {function} func
+ * @param {Number} time
+ * @return {function}
+ */
+export function throttle (func, time) {
+  let timeout
+  return function () {
+    if (timeout) {
+      return
+    }
+    timeout = setTimeout(() => {
+      func()
+      timeout = null
     }, time)
   }
 }

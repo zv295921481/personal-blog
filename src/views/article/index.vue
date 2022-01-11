@@ -30,6 +30,16 @@
       <div class="article-right">
         <Catalogue :catalogueList="articleInfo.headers"></Catalogue>
       </div>
+      <transition name="fade-transform" mode="out-in">
+        <!-- <button v-show="scrollTop > 500" class="to-top" @click="toTop">▲</button> -->
+        <button v-show="scrollTop > 500" class="to-top"
+          v-scroll-to="{
+              el: 'body',
+              duration: 500,
+              easing: 'linear',
+              offset: 0,
+          }">▲</button>
+      </transition>
     </template>
   </div>
 </template>
@@ -54,6 +64,7 @@ export default {
   data () {
     return {
       id: '', // 文章id
+      scrollTop: '',
       articleInfo: {}, // 文章内容
       skeletonBoolean: true // 骨架屏
       // likeBoolean: false // 是否点赞
@@ -108,13 +119,36 @@ export default {
             alert(err)
           })
       }
+    },
+
+    getScroll () {
+      this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
     }
+
+    // toTop () {
+    //   var timer = null
+    //   var speed = 40
+    //   if (this.scrollTop === 0) {
+    //     clearInterval(timer)
+    //   }
+    //   console.log('111', timer, speed)
+    //   timer = setInterval(() => {
+    //     if (this.scrollTop === 0) {
+    //       clearInterval(timer)
+    //     } else {
+    //       document.documentElement.scrollTop = this.scrollTop - speed + 'px'
+    //     }
+    //   }, 30)
+    // }
   },
   created () {
     console.log('params', this.$route.params)
     this.getArticle()
   },
-  mounted () {}
+  mounted () {
+    window.addEventListener('scroll', this.getScroll, 100)
+  }
 }
 </script>
 <style lang='scss' scoped>
@@ -173,9 +207,31 @@ export default {
     position: sticky;
     top: 20px;
     width: 270px;
-    height: 350px;
     background-color: #fff;
-    padding: 10px 10px;
+    padding: 10px 10px 30px 10px;
+    align-self: flex-start;
   }
+  .to-top {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    position: fixed;
+    bottom: 40px;
+    right: 70px;
+  }
+}
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.5s;
+}
+
+.fade-transform-enter {
+  opacity: 1;
+  transform: translateY(-30px);
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
