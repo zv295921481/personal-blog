@@ -69,7 +69,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to, from, next) => {
   console.log('loginInfo', localStorage.getItem('blogLogin'), to)
-  var loginBoolean = JSON.parse(localStorage.getItem('blogLogin')).loginBoolean || false
+  var loginBoolean = JSON.parse(localStorage.getItem('blogLogin')) ? JSON.parse(localStorage.getItem('blogLogin')).loginBoolean : false
   if (to.path === '/edit') {
     if (loginBoolean) {
       next()

@@ -1,6 +1,6 @@
 <template>
-  <div class=''>
-    我的书单
+  <div class='book'>
+    <h2>我的书单<small>(4)</small></h2>
   </div>
 </template>
 
@@ -19,4 +19,9 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.book {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
 </style>

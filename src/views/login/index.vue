@@ -3,11 +3,11 @@
     <form action="">
       <div class="item">
         <label for="">用户名：</label>
-        <input type="text" name="" id="" v-model="userName">
+        <input type="text" name="" id="" v-model="userName" autocomplete="off">
       </div>
       <div class="item">
         <label for="">密&nbsp;&nbsp;&nbsp;码：</label>
-        <input type="password" name="" id="" v-model="pwd">
+        <input type="password" name="" id="" v-model="pwd" autocomplete="new-password">
       </div>
       <button class="btn" @click="loginAction">登&nbsp;&nbsp;录</button>
     </form>
